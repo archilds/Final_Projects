@@ -1,0 +1,11 @@
+---
+title: ""
+author: ""
+date: "December 16, 2016"
+output: html_document
+---
+Johnny: yifu_liu@brown.edu
+Winnie: wenyue_xing@brown.edu
+Fang: fang_hu@brown.edu
+Scarlett: shaolingyun_guo@brown.edu
+Rosa: rouyu_xie@brown.edu

@@ -1,0 +1,17 @@
+{
+    "contents" : "---\ntitle: \"Untitled\"\nauthor: \"YL\"\ndate: \"December 17, 2016\"\noutput: html_document\n---\n1.a) by hand\n1.b)\n```{r}\nlibrary(stats4)\nlibrary(survival)\nmy.function<-function(a, b){\n  -log((a^4)*exp(30*b-a*(exp(9*b)+2*exp(8*b)+3*exp(7*b)+4*exp(6*b))))\n}\nmy.out<-mle(my.function, start=list(a=10, b=-20), method = \"Nelder-Mead\")\nmy.out\n```\n1.c)\n```{r}\nmy.function<-function(a, b){\n  -log((a^4)*exp(10*b-a*(exp(4*b)+2*exp(3*b)+3*exp(2*b)+4*exp(b))))\n}\nmy.out<-mle(my.function, start=list(a=1, b=-1), method = \"Nelder-Mead\")\nmy.out\n\ntime<-c(2,3,1,4)\nstatus<-c(1,1,1,1)\nz<-c(8,7,9,6)\nsummary(survreg(Surv(time,status)~z, dist=\"exponential\"))\n```\nSince the question have base hazard to be exponenital function, instead of Cox PH model only, we can also regard it as Accelerated Failure Time(AFT) Model. We have AFT model in lecture notes: Y = log(X)=mu+(beta^T)*Z + W(sigma). From the model we can see when Y does not change and W times sigma =0, we have mu+(beta^T)Z=0. Now, in our question Z is reduced by 5 and beta^T is -beta in our qusestion. We see beta is almost not change. And exp(-mu) is alpha, so alpha will change a lot. \n\n3.a) Use log-rank to test whether females and males have different survival curves. Is log-rank appropriate here?\n```{r}\n\nload(\"/Users/johnnyliu/Downloads/subsroi.RData\")\nhead(dd)\nfdata= dd[dd$gender==\"f\",]\nJ<-survdiff(Surv(day, status)~as.factor(gender), data=dd)\nJ\n\ncox.zph(coxph(Surv(day, status)~as.factor(gender), data=dd))\n```\nBoth the CoxPH and log-rank test need to have the proportational hazard assumption holds. From the proportational harzard assumption by cox.zph, we see the p-value = 0.438>0.05 which we see the proportational hazard assumption holds. Thus, log-rank test is appropriate.\n\n3.b) Use the univariate approach (for each R, but make sure including gender, R, and R×gender in the model) to screen for candidate predictors of the outcome, where R stands for each of the 113 candidate biomarkers. Report the top 5 biomarkers with the smallest p-values for R, and the top 5 for the interaction term R*×gender\n```{r}\n## univariate cox ph, \np.dd <- apply(dd[,4:116], 2, function(x) {\n  re <- summary(coxph(Surv(dd[,1], dd[,2])~as.factor(dd[,3]),data=dd))\n  return(re$logtest[3])  #extracting the pvalue\n})\n```",
+    "created" : 1482009978441.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2500673423",
+    "id" : "30970A95",
+    "lastKnownWriteTime" : 1482092751,
+    "path" : "~/Desktop/survival class/final.Rmd",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

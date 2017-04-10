@@ -1,0 +1,96 @@
+<p class = "refIntro">Throughout the course of making this app, we drew inspiration from and/or adapted code from the following sources. In addition, many of this app's features are made possible by the R package authors we list below.</p>
+
+<h3>References</h3>
+
+<h4>Data Sources</h4>
+
+<p><em>The following sources should be acknowledged for providing the data used in the pre-uploaded dataset. Details on which source each variable came from specifically can be found in the codebook.</em></p>
+
+<ol>
+
+	<li>County level demographic variables come from the American Community Survey 5 Year Estimates file, 2010-2014, by the US Census Bureau.</li>
+	
+	<li>County Shapfiles, U.S. Census Bureau: <a href="https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html" target = "_blank">https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html</a></li>
+	
+	<li>County level drug overdose rates come from the National Center for Health Statistics, <a href = "https://blogs.cdc.gov/nchs-data-visualization/drug-poisoning-mortality/" target = "_blank">https://blogs.cdc.gov/nchs-data-visualization/drug-poisoning-mortality/</a>.</li>
+	
+	<li>County level election results come from The Guardian for 2012 (<a href = "https://www.theguardian.com/news/datablog/2012/nov/07/us-2012-election-county-results-download" target = "_blank">https://www.theguardian.com/news/datablog/2012/nov/07/us-2012-election-county-results-download</a>) and Github for 2016 (
+<a href ="https://github.com/tonmcg/County_Level_Election_Results_12-16" target = "_blank">https://github.com/tonmcg/County_Level_Election_Results_12-16</a>).</li>
+
+	<li>Additional county level characteristics and health outcomes data were first assembled by the Health Inequality Project by Chetty et al. More information can be found at <a href = "https://healthinequality.org/" target = "_blank">https://healthinequality.org/</a>.</li>
+	
+	<li>The basemap in the mapping tab come from Open Street Map (<a href = "http://www.openstreetmap.org/" target = "_blank">http://www.openstreetmap.org/</a>)
+</ol>
+
+
+<h4>Adaptations and Code Sources</h4>
+
+<ol>
+	<li>Leaflet maps, RStudio: <a href="https://rstudio.github.io/leaflet/shiny.html" target = "_blank">https://rstudio.github.io/leaflet/shiny.html</a></li>
+	
+	<li>Mapping U.S. Counties in R: <a href="https://www.datascienceriot.com/mapping-us-counties-in-r-with-fips/kris/" target = "_blank">https://www.datascienceriot.com/mapping-us-counties-in-r-with-fips/kris/</a></li>
+	
+	<li>Linear regression, Sullivan Statistics: <a href="https://github.com/Sullivanstatistics/php2560-shiny-projects/blob/master/LinearRegression/server.R" target = "_blank">https://github.com/Sullivanstatistics/php2560-shiny-projects/blob/master/LinearRegression/server.R</a></li>
+	
+	<li>Regression model diagnostics in ggplot2: <a href = "https://zief0002.github.io/Computing-Club/notes/2015_S/2015_S_02_Visual_Diagnostics.html#1" target = "_blank">https://zief0002.github.io/Computing-Club/notes/2015_S/2015_S_02_Visual_Diagnostics.html#1</a>
+</ol>
+
+<h4>R Packages Used in This App</h4>
+
+<ol>
+	<li>Winston Chang, Joe Cheng, JJ Allaire, Yihui Xie and Jonathan McPherson (2016). shiny: Web Application Framework for R. R package version 0.14.2. <a href ="https://CRAN.R-project.org/package=shiny" target = "_blank">https://CRAN.R-project.org/package=shiny</a></li>
+	
+	<li>Eric Bailey (2015). shinyBS: Twitter Bootstrap Components for Shiny. R package version 0.61.
+  <a href ="https://CRAN.R-project.org/package=shinyBS" target = "_blank">https://CRAN.R-project.org/package=shinyBS</a></li>
+	
+	<li>Winston Chang (2016). shinythemes: Themes for Shiny. R package version 1.1.1. <a href = "https://CRAN.R-project.org/package=shinythemes" target = "_blank">https://CRAN.R-project.org/package=shinythemes</a></li>
+	
+	<li>Dean Attali (NA). colourpicker: A Colour Picker Widget for Shiny Apps, RStudio, R-markdown, and 'htmlwidgets'. R package version 0.2.1. <a href = "https://github.com/daattali/colourpicker" target = "_blank">https://github.com/daattali/colourpicker</a></li>
+  
+	<li>H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.</li>
+	
+	<li>Jeffrey B. Arnold (2016). ggthemes: Extra Themes, Scales and Geoms for 'ggplot2'. R package version 3.2.0. <a href = "https://CRAN.R-project.org/package=ggthemes" target = "_blank">https://CRAN.R-project.org/package=ggthemes</a></li>
+	
+	<li>Hlavac, Marek (2015). stargazer: Well-Formatted Regression and Summary Statistics Tables. R package version 5.2. <a href = "http://CRAN.R-project.org/package=stargazer" target = "_blank">http://CRAN.R-project.org/package=stargazer</a></li>
+	
+	<li>David B. Dahl (2016). xtable: Export Tables to LaTeX or HTML. R package version 1.8-2. <a href = "https://CRAN.R-project.org/package=xtable" target = "_blank">https://CRAN.R-project.org/package=xtable</a></li>
+	
+	<li>Joe Cheng and Yihui Xie (2016). leaflet: Create Interactive Web Maps with the JavaScript 'Leaflet' Library. R package version 1.0.1. <a href = "https://CRAN.R-project.org/package=leaflet"target = "_blank">https://CRAN.R-project.org/package=leaflet</a></li>
+	
+	<li>Roger Bivand, Tim Keitt and Barry Rowlingson (2016). rgdal: Bindings for the Geospatial Data Abstraction Library. R package version 1.2-4. <a href = "https://CRAN.R-project.org/package=rgdal" target = "_blank">https://CRAN.R-project.org/package=rgdal</a></li>
+	
+	<li>Hadley Wickham (2016). scales: Scale Functions for Visualization. R package version 0.4.1. <a href = "https://CRAN.R-project.org/package=scales" target = "_blank">https://CRAN.R-project.org/package=scales</a></li>
+	
+	<li>Hadley Wickham (2016). readxl: Read Excel Files. R package version 0.1.1. <a href = "https://CRAN.R-project.org/package=readxl" target = "_blank">https://CRAN.R-project.org/package=readxl</a></li>
+	
+	<li>Frank E Harrell Jr, with contributions from Charles Dupont and many others. (2016). Hmisc: Harrell Miscellaneous. R package version 4.0-0. <a href = "https://CRAN.R-project.org/package=Hmisc" target = "_blank">https://CRAN.R-project.org/package=Hmisc</a></li>
+</ol>
+
+<h4>Other Inspirations and Tips</h4>
+
+<ol>
+	<li>Reactive dataframes, StackOverflow: <a href = "https://stackoverflow.com/questions/29716868/r-shiny-how-to-get-an-reactive-data-frame-updated-each-time-pressing-an-actionb", target = "_blank">https://stackoverflow.com/questions/29716868/r-shiny-how-to-get-an-reactive-data-frame-updated-each-time-pressing-an-actionb</a></li>
+	
+	<li>Conditional subsetting, StackOverflow: <a href = "https://stackoverflow.com/questions/17056766/conditionally-subsetting-and-calculating-a-new-variable-in-dataframe-in-shiny" target = "_blank">https://stackoverflow.com/questions/17056766/conditionally-subsetting-and-calculating-a-new-variable-in-dataframe-in-shiny</a></li>
+	
+	<li>User FIPS data handling: <a href="http://stackoverflow.com/questions/5812493/adding-leading-zeros-using-r" target = "_blank">http://stackoverflow.com/questions/5812493/adding-leading-zeros-using-r</a></li>
+	
+	<li>Modal function reference: <a href = " https://ebailey78.github.io/shinyBS/docs/Modals.html" target = "_blank"> https://ebailey78.github.io/shinyBS/docs/Modals.html</a></li>
+	
+	<li>Layout matrix tip: <a href="https://stackoverflow.com/questions/30156443/r-setting-multiple-plot-heights-with-par" target = "_blank">https://stackoverflow.com/questions/30156443/r-setting-multiple-plot-heights-with-par</a></li>
+	
+	<li>Action button state info: <a href = "https://github.com/rstudio/shiny/issues/167" target = "_blank">https://github.com/rstudio/shiny/issues/167</a></li>
+	
+	<li>More action button state info: <a href = "https://stackoverflow.com/questions/24184070/actionbutton-in-rshiny-alternative-to-reset-value" target="_blank">https://stackoverflow.com/questions/24184070/actionbutton-in-rshiny-alternative-to-reset-value</a></li>
+	
+	<li>RCookbook, <a href = "http://www.cookbook-r.com/" target = "_blank">http://www.cookbook-r.com/</a></li>
+	
+	<li>Column reordering: <a href = "https://stackoverflow.com/questions/18339370/reordering-columns-in-a-large-dataframe" target = "_blank">https://stackoverflow.com/questions/18339370/reordering-columns-in-a-large-dataframe</a></li>
+	
+	<li>Variable labels with Hmisc: <a href = "https://stackoverflow.com/questions/19265172/converting-two-columns-of-a-data-frame-to-a-named-vector" target = "_blank">https://stackoverflow.com/questions/19265172/converting-two-columns-of-a-data-frame-to-a-named-vector</a></li>
+	
+	<li>Model diagnostics with ggplot2: <a href = "https://rpubs.com/therimalaya/43190" target = "_blank">https://rpubs.com/therimalaya/43190</a></li>
+	
+	<li>Color Scheme Designer: <a href = "http://paletton.com/#uid=1000u0kllllaFw0g0qFqFg0w0aF" target = "_blank">http://paletton.com/#uid=1000u0kllllaFw0g0qFqFg0w0aF</a></li>
+</ol>
+

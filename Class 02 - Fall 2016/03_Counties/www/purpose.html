@@ -1,0 +1,83 @@
+<h3>Overview</h3>
+
+<p>Welcome to the elections and health outcomes analytic dashboard. The goal of this dashboard is to help facilitate an analysis of trends underlying US presidential election results. We have provided a dataset of election results from the 2012 and 2016 presidential elections, presented at the county level, which includes information such as votes cast for each candidate, voter participation rates (if the county changed party winner between the two elections), and county level demographics, among others. The dataset also contains county-level health statistics. For a comprehensive list of variables included by default in this app, please refer to the Codebook. In addition, the different tabs on this dashboard will allow you to inspect each of these different variables visually, perform regression analyses, and create descriptive maps. Each tab of the application will be explained in detail below, but each page contains its own dedicated Help section for quick reference.
+
+<h4>County-Level Data</h4>
+  
+<p>For those unfamiliar with United States administrative borders, counties are political and geographic subvisions within US states. The population, size, and number of counties within a state can vary greatly across. Counties also differ in the amount of administrative authority granted to county governments. While the United States elects not by counties but by electoral votes at the state level, a wide variety of data is collected at the county level, allowing for some interesting analysis.
+
+<h4>Suggested Workflow</h4>
+  
+<p>Please use this tool and the data provided as you see fit. However, if the options seem overwhelming, we recommend proceeding through your analysis in the following way.
+
+<ol>
+	<li>Check the Codebook and Dataset tabs to examine what data we have available for you to use.</li>
+	
+	<li>Get familiar with the data available by first visualizing it using histograms, bar plots, boxplots, and violin plots, all of which are accessible via the Explore the Data tab.</li>
+	
+	<li>Begin to form some basic hypotheses by comparing variables using the Scatterplots, located in the same tab.</li>
+	
+	<li>Put your hypotheses to the test by running some regression models. Be sure to refer to the interpretation guidance provided on that page.</li>
+	
+	<li>On the Upload tab, add any of your own data that you think is interesting!</li>
+</ol>
+
+<p>For each tab we have also included some suggested variable combinations that might be interesting to take a look at!
+
+<hr class = "purposerule">
+
+<h3>Explore the Data</h3>
+
+<h4>Histograms &amp; Bar Plots</h4>
+
+<p>On this page you can begin to visualize the data by creating histograms or barcharts of the variables that have been uploaded. First, select if you would like a histogram or bar chart. Next, you can select what variable you would like to visualize. If you are creating a histogram, you can also choose the bin size to change the appearence of the chart. For continuous variables a table of summary statistics will appear below the plot; for categorical variables, a frequency and proportion table will be produced. You can also select different visual themes for your charts.</p>
+
+<h4>Scatterplots</h4>
+
+<p>On this page you can create scatterplots of different variables. You can choose your <em>x</em>- and <em>y</em>-axis variables, and then select a theme and change the formatting options. Below the chart, you can optionally add a simple linear regression line of the <em>x</em>-axis variable on the <em>y</em>-axis variable or fit a LOESS curve on the scatterplot.</p>
+
+<h4>Box and Violin Plots</h4>
+
+<p>Here you may create box and violin plots to further visualize your data. For best results, we recommend using categorical variable as the Grouping Variable and your continuous variable of interest for the <em>y</em>-axis. These plot types are excellent for comparing distributions of continuous variables across categories.</p>
+
+
+<h4>Dataset</h4>
+
+<p>This page will display the current dataset uploaded to the dashboard. At default it will include the baseline election and health dataset provided with the app. If you upload your own dataset, this page will be updated with the additional variables.</p>
+
+
+<h4>Map</h4>
+
+<p>You may select any continuous variable in the dataset on this page, and a geographic map of your data will be plotted. Feel free to scroll, zoom, change the quantiles, and select a county for more information.</p>
+
+<hr class = "purposerule">
+
+
+<h3>Analyze the Data</h4>
+
+<h4>Regression Models</h4>
+
+<p>Here you may test different regression models using the data. First, select your regression model as either linear, if you have a continuous outcome, or logistic, if you choose a binary outcome variable. You may then choose to add any number of numeric and categorical explanatory variables from the dataset. Regression output will be automatically generated.</p>
+
+
+<hr class = "purposerule">
+
+<h3>Upload Your Own</h3>
+
+<p>Here you may upload your own dataset to analyze along with the pre-uploaded election and health data. Datasets must match the following requirements:
+
+<ol>
+	<li>The data must be uploaded in CSV format.</li> 
+	
+	<li>The data must have a 5-digit county FIPS number. After uploading your file, you must specify which variable is your FIPS number. If your CSV drops the leading 0s for any county, these will be re-added by the dashboard.</li>
+</ol>
+
+<p>Simply upload your file, select your FIPS variable, and click the Merge button. If successful, your uploaded data and the full merged dataset will become visible on this page, and your variables will be added elsewhere in the dashboard. If the merged dataset does not appear, your merge was not successful. A good source of county-level data is <a href = "https://www.data.gov/counties/" target = "_blank">https://www.data.gov/counties/</a>.
+
+<p>If you would like to upload a different dataset, click the RESET button, and the newly uploaded data will be removed and the entire app reset.</p>
+
+<hr class = "purposerule">
+
+<h3>Pre-Uploaded Dataset</h3>
+
+<p style="padding-bottom:30px;:">The codebook for the pre-uploaded dataset and the sources for these data can be found in the next tab.</p>

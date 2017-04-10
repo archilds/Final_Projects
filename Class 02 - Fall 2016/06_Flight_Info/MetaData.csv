@@ -1,0 +1,15 @@
+ColumnName,ExampleValue,Description
+tbl,Table 6,Name of the data table
+Year,2014,Data Year
+quarter,2,Data Quarter
+city1,"Allentown/Bethlehem/Easton, PA",City1 is used to consolidate airports serving the same city market
+city2,"Dallas/Fort Worth, TX",City2 is used to consolidate airports serving the same city market
+nsmiles,1307,Non-Stop Market Miles (Using Radian Measure)
+passengers,36.92307692,Passenger Per day
+fare,282.2244048,Overall average fare
+carrier_lg,US,carrier with the largest fare
+large_ms,0.476190476,Market share for the largest carrier
+fare_lg,295.246875,Average fare for the largest carrier
+carrier_low,DL,carrier with the lowest fare
+lf_ms,0.342261905,Market share for the lowest carrier
+fare_low,239.6226087,Average fare for the lowest carrier

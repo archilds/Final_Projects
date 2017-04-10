@@ -1,0 +1,18 @@
+{
+    "contents" : "shinyServer(function(input, output) {\n  datasetInput <- reactive({\n    switch(input$dataset,\n           \"rock\" = rock,\n           \"pressure\" = pressure,\n           \"cars\" = cars)\n  })\n  \n  output$table <- renderTable({\n    datasetInput()\n  })\n  \n  output$downloadData <- downloadHandler(\n    filename = function() { paste(input$dataset, '.csv', sep='') },\n    content = function(file) {\n      write.csv(datasetInput(), file)\n    }\n  )\n})\n\noutput$downloadPlot <- downloadHandler(\n  filename = \"Shinyplot.png\",\n  content = function(file) {\n    png(file)\n    print(plotInput())\n    dev.off()\n  }) ",
+    "created" : 1482212008203.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1198441321",
+    "id" : "F446C8F0",
+    "lastKnownWriteTime" : 1482091883,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

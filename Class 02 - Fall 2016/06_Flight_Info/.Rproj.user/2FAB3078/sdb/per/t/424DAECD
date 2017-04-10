@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "check_packages = function(names)\n{\n  for(name in names)\n  {\n    if (!(name %in% installed.packages()))\n      install.packages(name, repos=\"http://cran.us.r-project.org\")\n    \n    library(name, character.only=TRUE)\n  }\n}\n",
+    "created" : 1481129594189.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1590645925",
+    "id" : "424DAECD",
+    "lastKnownWriteTime" : 1480993637,
+    "last_content_update" : 1480993637,
+    "path" : "~/Downloads/final 6/check_packages.R",
+    "project_path" : "check_packages.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "library(shiny)\nlibrary(shinyjs)\n\nload_data <- function() {\n  Sys.sleep(2)\n  hide(\"loading_page\")\n  show(\"main\")\n  show(\"main2\")\n}\n\nui <- fluidPage(\n  sidebarPanel(selectInput(inputId = \"year\",h5(\"Select Year\"),\n                           choices=list(\"2011\" = 2011, \"2012\" = 2012, \"2013\" = 2013, \"2014\" = 2014,\n                                        \"2015\" = 2015), selected =2011)),\n  useShinyjs(),\n  div(\n    id = \"loading_page\",\n    h1(\"Loading...\")\n  ),\n  hidden(\n    div(\n      id = \"main\",\n      htmlOutput(\"qtime_across_out\")\n    ),\n    navbarPage(\n      tabPanel(\n        avbarMenu(\n          tabPanel(\n    div(\n      #navbarPage(\n      #  tabPanel(\n          #navbarMenu(\n      id = \"main2\",\n      htmlOutput(\"qtime_across_out1\")\n         # )\n       )\n      )\n        )\n    )\n    )\n  )\n)\n\nserver <- function(input, output, session) {\n  load_data()\n  q_time_across<-reactive({\n    cc<-input$year\n    print(cc)\n  })\n  q_time_across1<-reactive({\n    cc<-input$year\n    print(cc)\n  })\n  output$qtime_across_out <- renderPrint({\n    q_time_across()\n  })\n  output$qtime_across_out1 <- renderPrint({\n    q_time_across1()\n  })\n\n}\n\nshinyApp(ui = ui, server = server)",
+    "created" : 1481905391453.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3692982626",
+    "id" : "D06695D",
+    "lastKnownWriteTime" : 1481923853,
+    "path" : "~/Desktop/computing/loading code.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

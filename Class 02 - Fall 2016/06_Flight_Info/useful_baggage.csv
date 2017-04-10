@@ -1,0 +1,91 @@
+"","IATA_code","Airline","Travel.Region","Carry.On","X1st.Checked.Bag","X2nd.Checked.Bag"
+"1","US","US Airways","Within USA","1 pc.,  Up to 45 in/115 cm (14 x 9 x 22 in or 36 x 23 x 56 cm) Up to 40 lbs/18 kg","$25 USD ($23 USD online)","$35 USD ($32 USD online)"
+"2","DL","Delta Airlines","Within USA","1 bag and 1 personal item, not exceeding 45 linear inches (or 114 cm) in combined length, width and height, including any handles and wheels.","25USD up to 50 lbs (23 kg) and 62 inches (157 cm) total linear dimensions","35USD up to 50 lbs (23 kg) and 62 inches (157 cm) total linear dimensions"
+"3","UA","United Airlines","Within USA","1 pc., (23 x 35 x 56 cm) or 114 cm","$25 USD","$35 USD"
+"4","FL","AirTran Airways","Within USA","1 bag 24” length x 16” width x 10” height, for a total combined linear measurement of 50 inches plus one personal-type item (e.g. purse, briefcase, camera, food container, or laptop) 17” length x 12” width x 8.5” height","$25USD - up to (< 62 in. and < 50 lbs.)","$35USD - up to (< 62 in. and < 50 lbs.)"
+"5","G4","Allegiant Airline","Within USA","Every passenger can bring One Free Personal Item with Maximum 
+dimensions are 7 x 15 x 16 inches; You can purchase One Carry-On Bag for Less Than $20
+with Maximum size is 9 x 14 x 22 inches per passenger ","The checked bag can weigh up to 40 pounds (18 kilos), with 
+Maximum size is 80 linear inches (203 centimeters) in height + width + length, for 
+price of less than $30.
+For Overweight Bags: Over 40 and under 70 pounds (18.2-31.8 kilos), add $50;
+Overweight Bags: between 71 and 100 pounds (32.2-45.4 kilos), add $75;
+Oversize Checked Bags: height + width + depth in excess of 80 linear inches, add $75.","The checked bag can weigh up to 40 pounds (18 kilos), with 
+Maximum size is 80 linear inches (203 centimeters) in height + width + length, for 
+price of less than $30.
+For Overweight Bags: Over 40 and under 70 pounds (18.2-31.8 kilos), add $50;
+Overweight Bags: between 71 and 100 pounds (32.2-45.4 kilos), add $75;
+Oversize Checked Bags: height + width + depth in excess of 80 linear inches, add $75."
+"6","AA","American Airlines","Within USA","1 carry-on bag. Total dimensions may not exceed 45in / 114cm (not more than 22in / 56cm x 14in / 35cm x 9in / 23cm);
+                1 personal item, such as purse, briefcase, laptop bag or a similar item such as book bag or shopping bag and must be smaller carry-on bag","$25 each way - maximum 23kgs / 50lbs;
+                may not exceed 62in / 157cm","$35 each way - maximum 23kgs / 50lbs;
+                may not exceed 62in / 157cm"
+"7","WN","Southwest Airlines","Within USA","Carryon items are limited to one bag plus one 
+smaller, personal-type item. Southwest Airlines limits carryon bag 
+dimensions to 10x16x24 inches. All Customers and Employees and their 
+items are subject to a thorough physical search","Maximum weight is 50 pounds and maximum size is 
+62 inches (length + width + height) per check piece of luggage. Overweight 
+items from 51 to 100 pounds and oversized items in excess of 62 inches but 
+not more than 80 inches will be accepted for an overweight and oversize baggage 
+fee of $75 per item","Maximum weight is 50 pounds and maximum size is 
+62 inches (length + width + height) per check piece of luggage. Overweight 
+items from 51 to 100 pounds and oversized items in excess of 62 inches but 
+not more than 80 inches will be accepted for an overweight and oversize baggage 
+fee of $75 per item"
+"8","F9","Frontier Airlines","Within USA","Ranges from $25USD - $50USD for 1 bag that must not exceed 10"" height x 16"" width x 24"" length, inclusive of all handles, wheels, and straps, and the bag can't weigh more than 35 pounds.","$25 up to 50 pounds or 62 linear inches","$30 up to 50 pounds or 62 linear inches
+                Overweight Fee: $75
+                Oversize Fee: $75"
+"9","AS","Alaska Airlines","Within USA","1 carry-on bag up to 10"" H x 17"" W x 24"" L (25 x 43 x 61 cm) including wheels and handles, plus one personal item, such as a purse, briefcase or laptop computer.","$25USD - up to 50 lbs and have a maximum dimension of 62 linear inches.
+                (Baggage fees may be subject to Mexico IVA (4%) or Canada GST (5%) taxes, depending on your itinerary.)","$25USD - up to 50 lbs and have a maximum dimension of 62 linear inches.
+                (Baggage fees may be subject to Mexico IVA (4%) or Canada GST (5%) taxes, depending on your itinerary.)"
+"10","NK","Spirit Airlines","Within USA","50 linear inches (22 x 18 x 10 in) or 127 centimeters (56 x 46 x 25 cm) 
+including handles and wheels; baggage fee for one carry-on is: At booking: $35.00; 
+Before online web check-in:$40.00; At online web check-in: $45.00; At airport ticket counter: $55.00","Maximum of 62 linear inches (length + width + height; 158 cm) including handles and 
+wheels and maximum of 40 pounds in weight (18.1 kg); baggage fee for first checked bag: At booking: $30.00;
+Before online web check-in: $35.00; At online web check-in: $40.00","Maximum of 62 linear inches (length + width + height; 158 cm) including handles and 
+wheels and maximum of 40 pounds in weight (18.1 kg); baggage fee for first checked bag: At booking: $40.00;
+Before online web check-in: $45.00; At online web check-in: $50.00"
+"11","CO","Continental Airline","Within USA","1 pc., (23 x 35 x 56 cm) or 114 cm","$25 USD","$35 USD"
+"12","B6","JetBlue Airways","Within USA","1 personal item e.g. purse, briefcase, laptop, etc. (For our Airbus A321: 17"" (43.2 centimeters) length x 13"" (33 centimeters) width x 11"" (27.9 centimeters) height and For our Airbus A320 / EMBRAER 190: 18"" (45.72 cm) length x 15"" (38.1 cm) width x 8"" (20.32 cm) height); plus one carry-on bag (For all our aircraft types: 24"" L (60.96 cm) x 16"" W (40.64 cm) x 10"" H (25.4 cm))","Free - up to 62"" (157.48 cm) in overall dimension and up to 50 pounds (22.68 kg)","$50 (A Value Added Tax (VAT) of up to 18% is also payable on baggage fees for certain international flights.)"
+"13","SY","Sun Country Airlines","Within USA","1 pc. 22” long x 14” wide x 9” tall, wt limit of 35lbs","$25 USD ($20 USD online)","$35 USD ($30 USD online)"
+"14","VX","Virgin America","Within USA","1 pc., max 50 inches, no weight however, if the item does not fit under the seat in front of you, it will need to be light enough to be safely lifted up and placed into the overhead bin.","$25 USD","$25 USD"
+"15","U5","USA3000 Airlines","Within USA",NA,NA,NA
+"16","9K","Cape Air","Within USA","One gate checked bag sufficiently small and lightweight to be cleared 
+through airport security screening not to exceed 45 linear inches (length + width + height =
+45”) plus 1 personal item (e.g. small purse, briefcase, electronic device) not to
+exceed 36 linear inches (length + width + height = 36”) are allowed for free.","Cape Air - excluding Caribbean: Free (less than 50 lbs);
+Cape Air - Caribbean: $20 (less than 50 lbs), $100 (51 lbs - 70 lbs);
+For partners:
+American: $25 (less than 50 lbs), $125 (51 lbs - 70 lbs);
+Alaska: $25 (less than 50 lbs), $90 (51 lbs - 70 lbs);
+JetBlue: $25 (less than 50 lbs), $125 (51 lbs - 70 lbs);
+Delta: $25 (less than 50 lbs), $115 (51 lbs - 70 lbs);
+United: $25 (less than 50 lbs), $125 (51 lbs - 70 lbs).","Cape Air - excluding Caribbean: $40 (less than 50 lbs), $80 (51 lbs - 70 lbs);
+Cape Air - Caribbean: $35 (less than 50 lbs), $115 (51 lbs - 70 lbs);
+For partners:
+American: $35 (less than 50 lbs), $135 (51 lbs - 70 lbs);
+Alaska: $25 (less than 50 lbs), $90 (51 lbs - 70 lbs);
+JetBlue: $35 (less than 50 lbs), $135 (51 lbs - 70 lbs);
+Delta: $35 (less than 50 lbs), $125 (51 lbs - 70 lbs);
+United: $35 (less than 50 lbs), $135 (51 lbs - 70 lbs)."
+"17","ZK","Great Lakes Airlines","Within USA","Great Lakes Airlines allows one personal item free of charge.
+Dimensions for personal items are no more 20” Length + 15” Width + 11"" Depth","The 1st checked pieces will be accepted at no charge.
+Dimensions are no more 22” Length + 11” Width + 11"" Depth.","The 2nd checked pieces will be accepted at no charge.
+Dimensions are no more 22” Length + 11” Width + 11"" Depth."
+"18","KS","Peninsula Airways","Within USA","Underneath space is limited to a small carry on item not to exceed
+16""L x 16""W x 9""H and a maximum weight of 25lbs. Personal items carried on board
+must be of a size and shape to allow for storage in the aircraft overhead compartments
+or underneath the seat in front of the passenger","Each piece of checked baggage must weigh 50 pounds (23kg) or less
+and not exceed a maximum total linear dimension (length + width + height) of 
+62 inches (158 cm). The first checked bag is free in Alaska and costs $25 in other places within the U.S.","Each piece of checked baggage must weigh 50 pounds (23kg) or less
+and not exceed a maximum total linear dimension (length + width + height) of 
+62 inches (158 cm). The fee for the second checked bag is $25 within the U.S."
+"19","3M","Silver Airways Corp","Within USA","Personal items and Carry-On bags are always FREE on Silver Airways, and
+each passenger is allowed one (1) personal item that must easily fit under the seat 
+or in an overhead compartment plus one (1) carry-on item","First checked bag (up to 50 lbs / 62 linear inches) charges $30,
+overweight bag (up to 70 lbs / 62 linear inches) – additional fee is $100,
+Overweight bag (up to 100 lbs / 62 linear inches) – additional fee is $200,
+Oversized bag (63-115 linear inches**) – additional fee is $200","Second checked bag (up to 50 lbs / 62 linear inches) charges $40,
+overweight bag (up to 70 lbs / 62 linear inches) – additional fee is $100,
+Overweight bag (up to 100 lbs / 62 linear inches) – additional fee is $200,
+Oversized bag (63-115 linear inches**) – additional fee is $200"

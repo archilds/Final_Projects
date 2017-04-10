@@ -1,0 +1,258 @@
+---
+title: "Data Preparation"
+output: html_document
+---
+
+
+We will be providing some of the background codes for our users to refer to in this R-markdown output. 
+
+This part of the code was written and operated on personal computers to clean data before we can use these data for our analysis and graphs. We did not include this in our major code chunk. It is because that the geographical code has the daily trial limit and it might be case-sensitive when running on different servers. Therefore, we would present how we process these data before we are loading the data into the shiny server in this section.
+
+In the first section, we will be demonstrating how we read the raw data, how we clean the data using the "gsub" regular expression, how we apply the "geocode" and output the data. The detailed steps will be noted as the comments.
+
+In the second section, we will be demonstrating how we collect and clean the baggage information data. We searched for each flight carrier baggage information and compiled them into the “buggage_new” table. The detailed explanations will be provided via the comments. 
+
+Our app users could follow the logic step-by-step. We encourage this learning-interacting process, and we would love to receive any suggestions and comments from our users. Please feel free to contact us with any questions. Our contact information would be listed in the “Introduction" section.
+
+
+Section I:
+```{r,eval=FALSE}
+#read data from csv
+
+table66<-read.csv("2015_table6.csv",header=TRUE,stringsAsFactors = TRUE)
+
+
+# clean city1 and city2 so that they don't have extra bracketsa or extra city names separated by"/"
+table66$city1_nobracket<-gsub("\\s*\\([^\\)]+\\)","",as.character(table66$city1))
+table66$city1<-gsub("\\/+[a-zA-Z]*","",table66$city1_nobracket)
+table66$city2_nobracket<-gsub("\\s*\\([^\\)]+\\)","",as.character(table66$city2))
+table66$city2<-gsub("\\/+[a-zA-Z]*","",table66$city2_nobracket)
+
+#create columns for city 1's longtitude and lattitude
+table66$lon1.long<-rep(NA,length(table66$city1))
+table66$lon1.lat<-rep(NA,length(table66$city1))
+
+
+
+# find all the unique city1s and city2s and find geographical information - longtitute and lattitude
+# because geocode usage has limited trials per day, I only get geographical information for unique cities to maximize the data we can operate on
+
+city1_unique<-unique(table66$city1)
+city2_unique<-unique(table66$city2)
+
+city1_geo<-geocode(city1_unique)
+city1_geocode<-data.frame(city1_unique,city1_geo)
+
+city2_geo<-geocode(city2_unique)
+city2_geocode<-data.frame(city2_unique,city2_geo)
+
+
+
+
+#find all the matches between major table and the unique ones
+
+for (i in 1:length(city1_geocode$city1_unique)){
+  for (j in 1:length(table66$city1)){
+    if (as.character(table66$city1)[j]==as.character(city1_geocode$city1_unique)[i]){
+      table66$lon1.long[j]<-city1_geocode$lon[i]
+      table66$lon1.lat[j]<-city1_geocode$lat[i]
+    }
+    
+  }
+}
+
+for (i in 1:length(city2_geocode$city2_unique)){
+  for (j in 1:length(table66$city2)){
+    if (as.character(table66$city2)[j]==as.character(city2_geocode$city2_unique)[i]){
+      table66$lon2.long[j]<-city2_geocode$lon[i]
+      table66$lon2.lat[j]<-city2_geocode$lat[i]
+    }
+  }
+}
+
+#output the csv file as our data
+write.csv(table66,file="2015_table6_withlon.csv")
+
+# Similarly, We have applied the same data processing steps for 2011-2014
+
+```
+
+
+Section II:
+
+```{r,eval=FALSE}
+library(XML) 
+library(RCurl)
+library(dplyr)
+# substract a baggage information table from website
+url <- "https://www.studentuniverse.com/frequently-asked-questions/helpful-travel-information"
+
+urldata <- getURL(url) 
+data <- readHTMLTable(urldata, stringsAsFactors = FALSE,which = 1)
+write.csv(data,file = 'baggage information.csv')
+buggage<-data
+buggage<-read.csv('baggage information.csv',header=TRUE,stringsAsFactors=FALSE)
+
+# select all the unique carrier names
+
+table6_2015<-read.csv('2015_table6_withlon.csv',header=TRUE,stringsAsFactors=FALSE)
+table6_2014<-read.csv('2014_table6_withlon.csv',header=TRUE,stringsAsFactors=FALSE)
+table6_2013<-read.csv('2013_table6_withlon.csv',header=TRUE,stringsAsFactors=FALSE)
+table6_2012<-read.csv('2012_table6_withlon.csv',header=TRUE,stringsAsFactors=FALSE)
+table6_2011<-read.csv('2011_table6_withlon.csv',header=TRUE,stringsAsFactors=FALSE)
+
+carrier<-rbind(table6_2011,table6_2012,table6_2013,table6_2014,table6_2015)
+uniq_carrier_lg<-as.vector(unlist(carrier %>% select(carrier_lg) %>% distinct(carrier_lg))) 
+uniq_carrier_low<-as.vector(unlist(carrier %>% select(carrier_low) %>% distinct(carrier_low)))
+uniq_carrier<-unique(c(uniq_carrier_lg,uniq_carrier_low))
+uniq_carrier<-uniq_carrier[uniq_carrier != '']
+uniq_carrier
+
+# add the baggage information of the carrier that are not included in the above table
+# including carrier: G4, WN, NK,U5, 9K, ZK,KS,3M
+# build a new buggage information table: buggage_new
+southwest_carryon<-'Carryon items are limited to one bag plus one 
+smaller, personal-type item. Southwest Airlines limits carryon bag 
+dimensions to 10x16x24 inches. All Customers and Employees and their 
+items are subject to a thorough physical search'
+southwest_1st_check<-'Maximum weight is 50 pounds and maximum size is 
+62 inches (length + width + height) per check piece of luggage. Overweight 
+items from 51 to 100 pounds and oversized items in excess of 62 inches but 
+not more than 80 inches will be accepted for an overweight and oversize baggage 
+fee of $75 per item'
+southwest_2nd_check<-'Maximum weight is 50 pounds and maximum size is 
+62 inches (length + width + height) per check piece of luggage. Overweight 
+items from 51 to 100 pounds and oversized items in excess of 62 inches but 
+not more than 80 inches will be accepted for an overweight and oversize baggage 
+fee of $75 per item'
+
+
+spirit_carryon<-'50 linear inches (22 x 18 x 10 in) or 127 centimeters (56 x 46 x 25 cm) 
+including handles and wheels; baggage fee for one carry-on is: At booking: $35.00; 
+Before online web check-in:$40.00; At online web check-in: $45.00; At airport ticket counter: $55.00'
+spirit_1st_check<-'Maximum of 62 linear inches (length + width + height; 158 cm) including handles and 
+wheels and maximum of 40 pounds in weight (18.1 kg); baggage fee for first checked bag: At booking: $30.00;
+Before online web check-in: $35.00; At online web check-in: $40.00'
+spirit_2nd_check<-'Maximum of 62 linear inches (length + width + height; 158 cm) including handles and 
+wheels and maximum of 40 pounds in weight (18.1 kg); baggage fee for first checked bag: At booking: $40.00;
+Before online web check-in: $45.00; At online web check-in: $50.00'
+
+G4_name<-'Allegiant Airline'
+G4_carryon<-'Every passenger can bring One Free Personal Item with Maximum 
+dimensions are 7 x 15 x 16 inches; You can purchase One Carry-On Bag for Less Than $20
+with Maximum size is 9 x 14 x 22 inches per passenger '
+G4_1st_check<-'The checked bag can weigh up to 40 pounds (18 kilos), with 
+Maximum size is 80 linear inches (203 centimeters) in height + width + length, for 
+price of less than $30.
+For Overweight Bags: Over 40 and under 70 pounds (18.2-31.8 kilos), add $50;
+Overweight Bags: between 71 and 100 pounds (32.2-45.4 kilos), add $75;
+Oversize Checked Bags: height + width + depth in excess of 80 linear inches, add $75.'
+G4_2nd_check<-'The checked bag can weigh up to 40 pounds (18 kilos), with 
+Maximum size is 80 linear inches (203 centimeters) in height + width + length, for 
+price of less than $30.
+For Overweight Bags: Over 40 and under 70 pounds (18.2-31.8 kilos), add $50;
+Overweight Bags: between 71 and 100 pounds (32.2-45.4 kilos), add $75;
+Oversize Checked Bags: height + width + depth in excess of 80 linear inches, add $75.'
+
+U5_name<-'USA3000 Airlines'
+U5_commen<-'this airline ceased operation in January 30, 2012'
+
+name_9K<-'Cape Air'
+carryon_9K<-'One gate checked bag sufficiently small and lightweight to be cleared 
+through airport security screening not to exceed 45 linear inches (length + width + height =
+45") plus 1 personal item (e.g. small purse, briefcase, electronic device) not to
+exceed 36 linear inches (length + width + height = 36") are allowed for free.'
+First_check_9K<-'Cape Air - excluding Caribbean: Free (less than 50 lbs);
+Cape Air - Caribbean: $20 (less than 50 lbs), $100 (51 lbs - 70 lbs);
+For partners:
+American: $25 (less than 50 lbs), $125 (51 lbs - 70 lbs);
+Alaska: $25 (less than 50 lbs), $90 (51 lbs - 70 lbs);
+JetBlue: $25 (less than 50 lbs), $125 (51 lbs - 70 lbs);
+Delta: $25 (less than 50 lbs), $115 (51 lbs - 70 lbs);
+United: $25 (less than 50 lbs), $125 (51 lbs - 70 lbs).'
+Second_check_9K<-'Cape Air - excluding Caribbean: $40 (less than 50 lbs), $80 (51 lbs - 70 lbs);
+Cape Air - Caribbean: $35 (less than 50 lbs), $115 (51 lbs - 70 lbs);
+For partners:
+American: $35 (less than 50 lbs), $135 (51 lbs - 70 lbs);
+Alaska: $25 (less than 50 lbs), $90 (51 lbs - 70 lbs);
+JetBlue: $35 (less than 50 lbs), $135 (51 lbs - 70 lbs);
+Delta: $35 (less than 50 lbs), $125 (51 lbs - 70 lbs);
+United: $35 (less than 50 lbs), $135 (51 lbs - 70 lbs).'
+
+
+ZK_name<-'Great Lakes Airlines'
+ZK_carryon<-'Great Lakes Airlines allows one personal item free of charge.
+Dimensions for personal items are no more 20" Length + 15" Width + 11" Depth'
+ZK_1st_check<-'The 1st checked pieces will be accepted at no charge.
+Dimensions are no more 22" Length + 11" Width + 11" Depth.'
+ZK_2nd_check<-'The 2nd checked pieces will be accepted at no charge.
+Dimensions are no more 22" Length + 11" Width + 11" Depth.'
+
+KS_name<-'Peninsula Airways'
+KS_carryon<-'Underneath space is limited to a small carry on item not to exceed
+16"L x 16"W x 9"H and a maximum weight of 25lbs. Personal items carried on board
+must be of a size and shape to allow for storage in the aircraft overhead compartments
+or underneath the seat in front of the passenger'
+KS_1st_check<-'Each piece of checked baggage must weigh 50 pounds (23kg) or less
+and not exceed a maximum total linear dimension (length + width + height) of 
+62 inches (158 cm). The first checked bag is free in Alaska and costs $25 in other places within the U.S.'
+KS_2nd_check<-'Each piece of checked baggage must weigh 50 pounds (23kg) or less
+and not exceed a maximum total linear dimension (length + width + height) of 
+62 inches (158 cm). The fee for the second checked bag is $25 within the U.S.'
+
+name_3M<-'Silver Airways Corp'
+carryon_3M<-'Personal items and Carry-On bags are always FREE on Silver Airways, and
+each passenger is allowed one (1) personal item that must easily fit under the seat 
+or in an overhead compartment plus one (1) carry-on item'
+First_check_3M<-'First checked bag (up to 50 lbs / 62 linear inches) charges $30,
+overweight bag (up to 70 lbs / 62 linear inches) - additional fee is $100,
+Overweight bag (up to 100 lbs / 62 linear inches) - additional fee is $200,
+Oversized bag (63-115 linear inches**) - additional fee is $200'
+Secnd_check_3M<-'Second checked bag (up to 50 lbs / 62 linear inches) charges $40,
+overweight bag (up to 70 lbs / 62 linear inches) - additional fee is $100,
+Overweight bag (up to 100 lbs / 62 linear inches) - additional fee is $200,
+Oversized bag (63-115 linear inches**) - additional fee is $200'
+
+
+buggage_new<-buggage
+buggage_new[nrow(buggage_new)+seq(1:8),]<-rep(NA,ncol(buggage_new))
+
+buggage_new[nrow(buggage)+1,]<-c(nrow(buggage_new)+1,G4_name,'Within USA', G4_carryon, G4_1st_check, G4_2nd_check)
+
+buggage_new[nrow(buggage)+2,]<-c(nrow(buggage_new)+2,'Southwest Airlines','Within USA',southwest_carryon,southwest_1st_check,southwest_2nd_check)
+
+buggage_new[nrow(buggage)+3,]<-c(nrow(buggage_new)+3,'Spirit Airlines','Within USA',spirit_carryon,spirit_1st_check,spirit_2nd_check)
+
+buggage_new[nrow(buggage)+4,]<-c(nrow(buggage_new)+4, U5_name,NA,NA,NA,NA)
+
+buggage_new[nrow(buggage)+5,]<-c(nrow(buggage_new)+5,name_9K,'Within USA',carryon_9K,First_check_9K,Second_check_9K)
+
+buggage_new[nrow(buggage)+6,]<-c(nrow(buggage_new)+6,ZK_name,'Within USA',ZK_carryon,ZK_1st_check,ZK_2nd_check)
+
+buggage_new[nrow(buggage)+7,]<-c(nrow(buggage_new)+7,KS_name,'Within USA',KS_carryon,KS_1st_check,KS_2nd_check)
+
+buggage_new[nrow(buggage)+8,]<-c(nrow(buggage_new)+8,name_3M,'Within USA',carryon_3M,First_check_3M,Secnd_check_3M)
+
+#___________________________________________________
+
+
+# find the index of the unique carrier in buggage_new 
+uniq_carrier_buggageid<-c(182,96,180,56,191,64,192,114,57,193,180,133,171,186,194,195,196,197,198)
+
+# substract the information of unique carrier and do data cleaning
+useful_buggage<-buggage_new[uniq_carrier_buggageid,]
+useful_buggage<-cbind(uniq_carrier,useful_buggage[,-1])
+colnames(useful_buggage)[1]<-'IATA_code'
+
+useful_buggage$Airline[which(useful_buggage$IATA_code=='CO')]<-'Continental Airline'
+useful_buggage$Travel.Region<-'Within USA'
+rownames(useful_buggage) <- NULL
+
+# comment
+# the Continental Airline ceased operation in March 3, 2012, now merged with UA.
+# the USA3000 Airlines ceased operation in January 30, 2012
+
+# save the useful_buggage table
+write.csv(useful_buggage,file = 'useful_buggage.csv')
+```
+

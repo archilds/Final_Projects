@@ -1,0 +1,29 @@
+<h5>Interpretation of the Regression Output</h5>
+
+<p><strong>Residuals</strong> are essentially the difference between the actual observed outcome values and the outcome values that the model predicted. The Residuals section of the model has 5 summary points. On looking at how symmetrical these points are around the mean value (0), we are able to tell how well the model fits the data.</p>
+
+<p><strong>Intercept</strong> represents the estimated mean outcome variable when all explanatory variables are set to 0.</p>
+
+<p>The <strong>coefficient estimate</strong> on the explanatory variable(s) represents the effect of the given variable on the outcome variable, when adjusting or controlling for covariates. Here we associate an increase of one unit in the explanatory variable with an increase in the outcome variable equaling the magnitude of the corresponding coefficient, while holding all other explanatory variables in a multivariate linear regression model steady.</p>
+
+<p>The <strong>coefficient <em>t</em>-value</strong> is a measure of how many standard deviations our coefficient estimate is from from 0 according to a standard <em>t</em> distribution, while <strong>Pr(>|t|)</strong>, found in the model output, expresses a <em>p</em>-value: the probability of observing a t statistic equal to or larger than |t| given the truth of the null hypothesis. It is an expression of the likelihood that chance explains the observed association. Therefore, the <em>t</em> statistic tests the hypothesis that the slope for that explanatory variable is zero.</p>
+
+<p><strong>Residual standard error</strong> measures how far observed outcome variables are from the predicted/fitted outcome variable.</p>
+
+<p><strong>R-squared</strong> approximates the percentage of the variation in the outcome variable that can be explained by our model (the explanatory variables selected). The adjusted R-squared is used for multiple regression models in order to penalize overfitting (the inclusion of too many explanatory variables).</p>
+
+<p>The <strong><em>F</em> statistic</strong> tests the null hypothesis that all model coefficients are zero, <em>i.e.</em>, that the slopes for all explanatory variables are zero. An <em>F</em> statistic that is larger than 1 is sufficient to reject the null hypothesis.</p>
+
+<h5>Diagnostic Plots</h5>
+
+<p>Diagnostic plots arise from the assumptions of ordinary least squares regression: normality, independence, linearity, and constant variance (homoscedasticity). These visualizations enable us to assess the validity of such assumptions.</p>
+
+<p>The <strong>residual vs fitted</strong> plot assesses the linearity assumption. If the outcome variable is linearly related to the explanatory outcome, there should be no systematic relationship between residual and fitted (predicted values). The red line should be flat if this condition is met.</p>
+
+<p>The <strong>scale location</strong> plot assesses the constant variance assumption; points herein should appear as a random band around a horizontal line if the assumption is met.</p>
+
+<p>The <strong>Q-Q plot</strong> is a probability plot of standardized residuals plotted against the values that would be expected under normality. Points in this graph should fall on the straight 45-degree line if the normality assumption is met.</p>
+
+<p><strong>Cook’s distance</strong> attempts to identify outliers, high-leverage points, and influential observation&mdash;in other words, observations that have disproportionate influence on the model parameters.</p>
+
+
