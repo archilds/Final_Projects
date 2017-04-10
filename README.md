@@ -14,7 +14,7 @@
 ```R
 # First clone the repository with git. If you have cloned it into
 # ~/Final Projects, first go to that directory, then use runApp().
-setwd("~/shiny_example")
+setwd("~01_Spring_2016/01_Draft_Kings/")
 runApp()
 ```
 
