@@ -14,7 +14,7 @@ library(ggmap)
 #Dataset to use(will change to dataset with weather)
 #load("~/R/final shiny app/CitiesDB.final.Rda")
 load("DB_Normalized.Rda")
-dataset<-CitiesDB
+dataset<-CitiesDB_Normalized
 #CitiesDB$Size <- as.numeric(CitiesDB$Size)
 #CitiesDB$Weather <- as.numeric(CitiesDB$Weather)
 
@@ -200,7 +200,7 @@ shinyServer(function(input, output) {
     link <- paste('[Link](https://www.indeed.com', link, sep='')
     link <- paste(link, ')', sep='')
     #Jobs
-    indeed_jobs <- data.frame(job_title,company,location,description,salary,link)
+    indeed_jobs <- data.frame(job_title,company,location,description,link)
     
    indeed_jobs
     
