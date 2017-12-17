@@ -1,0 +1,26 @@
+---
+title: "Introduction"
+---
+### Welcome to the Epi Wizard !
+
+
+* Epi Wizard is an interactive app using the newly designed 'Epicalculator' package. 
+
+* This app contains tools specifically designed for epidemiological data analysis. 
+
+* We've thoughtfully included calculators for risk data, person-time data, odds ratio measurements and other common measurement parameters (e.g. Attributable Risk and Population Attributable Risk). 
+
+* For risk calculations, both crude and stratified data can be entered as text separated by commas.
+
+      Format:
+(exposed people with disease, unexposed people with disease, exposed people without disease, unexposed people without disease)
+
+* For rate calculations, both crude and stratified data can be entered as text separated by commas.
+
+      Format:
+(exposed people with disease, unexposed people with disease, exposed person-time, unexposed person-time)
+
+* The app is designed to output the estimated effects with 95% confidence intervals and provide a graphical comparison of crude and summary estimates. 
+
+* Other applications are available for crude data calculations. More functions such as chi-square hypothesis testing of homogeneity are available in the R package 'Epicalculator'.
+

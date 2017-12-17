@@ -1,9 +1,8 @@
+# Download all packages: The first time is going to take time
+source("check_packages.R")
 
 library(plotly)
 library(shiny)
-
-# load css library
-devtools::install_github('andrewsali/shinycssloaders')
 library(shinycssloaders)
 
 

@@ -11,4 +11,6 @@
 ## Feedback 12-12
 
 - App layout looks good. 
-- Still wont run properly without me having to install a lot of packages. 
+- Still wont run properly without me having to install a lot of packages.
+
+#### We have addressed this feedback (12-12) should be working now

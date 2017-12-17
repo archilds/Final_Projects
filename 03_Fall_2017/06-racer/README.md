@@ -1,6 +1,3 @@
-# Final shiny-app
-
-
 ## What to do
 
 1. Place all your current files in here for your shiny app. 

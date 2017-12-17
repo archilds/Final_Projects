@@ -10,29 +10,39 @@ conc_list <- link %>%
 conc_list <- as.vector(conc_list)
 names(conc_list) <- conc_list
 
-ui <- navbarPage("BDegreeAdvisor",
+library(shinythemes)
+
+ui <- navbarPage("BDegreeAdvisor", theme = shinytheme("united"),
                  tabPanel("Concentration Requirement",
                           sidebarLayout(
                             sidebarPanel(
+                              # Add Brown Logo
+                              img(src ='https://www.edx.org/sites/default/files/school/image/logo/brown_200x101.png', aligh = "left"),
                               # Select concentration
                               selectInput("selected_conc", label = h5("Select a concentration"), 
-                                          choices = names(conc_list)), 
+                                          choices = names(conc_list), selected = conc_list[29]), 
                               # Submit button
-                              actionButton("submit", label = h5("See table of requirements!"))
+                              actionButton("submit", "See table of requirements!"),
+                              # Download button
+                              h5("Download the selected table"),
+                              downloadButton("downloadData", "Download",class="btn btn-primary btn-sm")
+                             
                             ),
                             mainPanel(
                               # Display table of concentration requirements 
                               tableOutput("conc_table")
-                              )
                             )
-                          ),
-                 tabPanel("Compare concentration requirements",  sidebarLayout(
+                          )
+                 ),
+                 tabPanel("Compare Concentration Requirements",  sidebarLayout(
                    sidebarPanel(
+                     # Add Brown Logo
+                     img(src ='https://www.edx.org/sites/default/files/school/image/logo/brown_200x101.png', aligh = "left"),
                      # Select concentration
                      selectInput("selected_conc1", label = h5("Select concentration 1"), 
-                                 choices = names(conc_list)), 
+                                 choices = names(conc_list), selected = conc_list[29]), 
                      selectInput("selected_conc2", label = h5("Select concentration 2"), 
-                                 choices = names(conc_list)), 
+                                 choices = names(conc_list), selected = conc_list[78]), 
                      # Submit button
                      actionButton("submit2", label = h5("See table of requirements!"))
                      
@@ -47,16 +57,17 @@ ui <- navbarPage("BDegreeAdvisor",
                  tabPanel("Concentration demographics")
 )
 
-## Code used to change values of choices in switch function
-#numbering <- vector(list, length=length(conc_list))
-#for (i in 1:length(conc_list)) {
-  #numbering[i] <- paste0(conc_list[[i]], " = ", i)
-#}
 
 server <- function(input, output) {
   
   ################################################# Tab 1   #################################################
   conc_name <- eventReactive(input$submit, {
+    ## Code used to change values of choices in switch function
+    #numbering <- vector(list, length=length(conc_list))
+    #for (i in 1:length(conc_list)) {
+    #numbering[i] <- paste0(conc_list[[i]], " = ", i)
+    #}
+    
     switch(input$selected_conc,
            "Africana Studies" = 1, 
            "American Studies" = 2, 
@@ -154,9 +165,10 @@ server <- function(input, output) {
     link_table <- html_nodes(content, 'table')
     # If the department doesn't display a table, an error "subscript out of bounds" appears. tryCatch will 
     # ignore this error and allow the function to keep working
-    scrape_table <- tryCatch(html_table(link_table)[[1]], error=function(e) print(NA))
+    scrape_table <- tryCatch(html_table(link_table)[[1]], error=function(e) matrix(nrow=2, ncol=2))
+    
     # Create a table only if the table exists (i.e. if scrape table ??? NA)
-    if (is.na(scrape_table) == FALSE) {
+    if (is.na(scrape_table[1,1]) == FALSE) {
       # Convert the table into a dataframe  
       classes <- scrape_table$X1
       class_name <- scrape_table$X2
@@ -171,7 +183,43 @@ server <- function(input, output) {
     } else {stop('This department does not have a table of requirements')}
   })
   
- 
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      paste(input$selected_conc,"Requirements", ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv({
+        library(rvest)
+        library(dplyr)
+        # Pull up the website that has a list of all the undergraduate concentrations
+        link <- html_session("https://bulletin.brown.edu/the-college/concentrations/")
+        # Select the concentration of interest
+        link_conc <- link %>% follow_link(conc_name()+36)      
+        # Read the content of the link
+        content <- read_html(link_conc)
+        # Scrape the table
+        link_table <- html_nodes(content, 'table')
+        # If the department doesn't display a table, an error "subscript out of bounds" appears. tryCatch will 
+        # ignore this error and allow the function to keep working
+        scrape_table <- tryCatch(html_table(link_table)[[1]], error=function(e) print(NA))
+        # Create a table only if the table exists (i.e. if scrape table ??? NA)
+        if (is.na(scrape_table) == FALSE) {
+          # Convert the table into a dataframe  
+          classes <- scrape_table$X1
+          class_name <- scrape_table$X2
+          number_classes <- scrape_table$X3
+          
+          table_req1 <- data_frame(classes, class_name, number_classes)
+          table_req1$number_classes[table_req1$number_classes == ""] <- " "
+          
+          explain <- list("", "", "If the Class Number cell is empty or has a NA, refer to the category the class belongs to.")
+          table_req2 <- rbind(table_req1, explain)
+          table_req1re<- rename(table_req2, "Class Code" = classes, "Class Name" = class_name, "Number of Classes" = number_classes)
+        } else {stop('This department does not have a table of requirements')}
+      }, file, row.names = FALSE)
+    }
+  )
+  
   ################################################# Tab 2   ################################################# 
   conc_name1 <- eventReactive(input$submit2, {
     switch(input$selected_conc1,
@@ -343,65 +391,72 @@ server <- function(input, output) {
            "Visual Art" = 81)                                  
   }, ignoreNULL = FALSE)   
   
- 
+  
   
   output$conc_comp <- renderTable({
-      library(rvest)
-      library(dplyr)
-      # Pull up the website that has a list of all the undergraduate concentrations
-      link <- html_session("https://bulletin.brown.edu/the-college/concentrations/")
-      # Select the concentration of interest
-      link_conc1 <- link %>% follow_link(conc_name1()+36)
-      link_conc2 <- link %>% follow_link(conc_name2()+36)
-      # Read the content of the link
-      content1 <- read_html(link_conc1)
-      content2 <- read_html(link_conc2)
-      # Scrape the table
-      link_table1 <- html_nodes(content1, 'table')
-      link_table2 <- html_nodes(content2, 'table')
-      # If the department doesn't display a table, an error "subscript out of bounds" appears. tryCatch will 
-      # ignore this error and allow the function to keep working
-      scrape_table1 <- tryCatch(html_table(link_table1)[[1]], error=function(e) print(NA))
-      scrape_table2 <- tryCatch(html_table(link_table2)[[1]], error=function(e) print(NA))
-      # Create a table only if the table exists (i.e. if scrape table ??? NA)
-      if ((is.na(scrape_table1)== FALSE) && ( is.na(scrape_table2) == FALSE)) {
-        # Convert the table into a dataframe  
-        
-        classes <- scrape_table1$X1
-        class_name <- scrape_table1$X2
-        number_classes <- scrape_table1$X3
-        
-        table_req1 <- data_frame(classes, class_name, number_classes)
-        table_req1$number_classes[table_req1$number_classes == ""] <- " "
-        
-        space1 <- list("-", "-", "-")
-        space2 <- list("-", "-", "-")
-        name1 <- list("Concentration 1: ", "", "")
-        name2 <- list("Concentration 2: ", "", "")
-        
-        table_req1s <- rbind(name1, table_req1)
-        table_req1s <- rbind(table_req1s, space1)
-        table_req1s <- rbind(table_req1s,space2)
-        
-
-        classes <- scrape_table2$X1
-        class_name <- scrape_table2$X2
-        number_classes <- scrape_table2$X3
-        table_req2 <- data_frame(classes, class_name, number_classes)
-        table_req2 <- rbind(name2, table_req2)
-        
-        total <- rbind(table_req1s, table_req2)
-        
-        
-        total$number_classes[total$number_classes == ""] <- " "
-        
-        table_req_2<-rename(total, "Class Code" = classes, "Class Name" = class_name, "Number of Classes" = number_classes)
-        
-        
-        explain <- list("", "", "If the Class Number cell is empty or has a NA, refer to the category the class belongs to.")
-        rbind(table_req_2, explain)
-        
-      } else {stop('One of the concentrations does not have a table presented')}
+    library(rvest)
+    library(dplyr)
+    # Pull up the website that has a list of all the undergraduate concentrations
+    link <- html_session("https://bulletin.brown.edu/the-college/concentrations/")
+    # Select the concentration of interest
+    link_conc1 <- link %>% follow_link(conc_name1()+36)
+    link_conc2 <- link %>% follow_link(conc_name2()+36)
+    # Read the content of the link
+    content1 <- read_html(link_conc1)
+    content2 <- read_html(link_conc2)
+    # Scrape the table
+    link_table1 <- html_nodes(content1, 'table')
+    link_table2 <- html_nodes(content2, 'table')
+    # If the department doesn't display a table, an error "subscript out of bounds" appears. tryCatch will 
+    # ignore this error and allow the function to keep working
+    scrape_table1 <- tryCatch(html_table(link_table1)[[1]], error=function(e)  matrix(nrow=2, ncol=2))
+    scrape_table2 <- tryCatch(html_table(link_table2)[[1]], error=function(e)  matrix(nrow=2, ncol=2))
+    
+    # Create a table only if the table exists (i.e. if scrape table ??? NA)
+    if ((is.na(scrape_table1[1,1])== FALSE) && (is.na(scrape_table2[1,1]) == FALSE)) {
+      # This code chunk puts the tables for each concentration together, one after the other 
+      ## Table 1 
+      classes <- scrape_table1$X1
+      class_name <- scrape_table1$X2
+      number_classes <- scrape_table1$X3
+      
+      table_req1 <- data_frame(classes, class_name, number_classes)
+      table_req1$number_classes[table_req1$number_classes == ""] <- " "
+      
+      # Add spaces between the two tables
+      space1 <- list("-------------------------------------------------", "-------------------------------------------------", "---------------------------------------")
+      space2 <- list("-------------------------------------------------", "-------------------------------------------------", "---------------------------------------")
+      
+      #Add a title for each table
+      name1 <- list("Concentration 1: ", "", "")
+      name2 <- list("Concentration 2: ", "", "")
+      
+      table_req1s <- rbind(name1, table_req1)
+      table_req1s <- rbind(table_req1s, space1)
+      table_req1s <- rbind(table_req1s,space2)
+      
+      ## Table 2
+      classes <- scrape_table2$X1
+      class_name <- scrape_table2$X2
+      number_classes <- scrape_table2$X3
+      table_req2 <- data_frame(classes, class_name, number_classes)
+      table_req2 <- rbind(name2, table_req2)
+      
+      # Join the two tables
+      total <- rbind(table_req1s, table_req2)
+      
+      # Get rid of the NAs in the number of classes
+      total$number_classes[total$number_classes == ""] <- " "
+      
+      # Rename the columns
+      table_req_2<-rename(total, "Class Code" = classes, "Class Name" = class_name, "Number of Classes" = number_classes)
+      
+      # Add an explanation about empty cell or NA in the number of classes
+      explain <- list("", "", "If the Class Number cell is empty or has a NA, refer to the category the class belongs to.")
+      
+      rbind(table_req_2, explain)
+      
+    } else {stop('One of the concentrations does not have a table presented')}
   })  
   
 }

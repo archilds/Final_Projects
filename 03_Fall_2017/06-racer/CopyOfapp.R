@@ -2,7 +2,7 @@ library(shiny)
 
 ###requires install.packages("shinythemes")
 
-ui <- fluidPage(theme = shinytheme("darkly"),
+ui <- fluidPage(theme = shinytheme("cyborg"),
   
   fluidRow(column(width = 4,
                   tags$img(src = "logo.jpg")), 

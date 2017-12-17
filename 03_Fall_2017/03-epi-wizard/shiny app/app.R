@@ -29,7 +29,7 @@ ui <-  navbarPage(useShinyjs(),
 
                   #introduction panel for description of the app
                   tabPanel("Introduction",
-                           verbatimTextOutput("introduction")),
+                           uiOutput("introduction")),
 
                   #creating 4 navgation panel for rate data, risk data, others and graphs
                   #inside each navigation panel we will have tabpanel for different measures
@@ -268,19 +268,10 @@ ui <-  navbarPage(useShinyjs(),
 
 server <- function(input, output)({
   #introduction
-  output$introduction<-renderText({
-    "Welcome to the Epi Wizard!
-
-    Epi Wizard is an interactive app using the newly designed 'Epicalculator' package. This app contains tools
-    specifically designed for epidemiological data analysis. We've thoughtfully included calculators for risk
-    data, person-time data, odds ratio measurements and other common measurement parameters (i.e. Attributable
-    Risk and Population Attributable Risk).
-
-    For risk calculations, both crude and stratified data can be entered as text separated by commas. The app
-    is designed to output the estimated effects with 95% confidence intervals and provide a graphical comparison
-    of crude and summary estimates. Other applications are available for crude data calculations. More functions
-    such as chi-square hypothesis testing of homogeneity are available in the R package 'Epicalculator'."
+  output$introduction<-renderUI({
+     includeMarkdown("Introduction.Rmd")
   })
+
 
   ####################################################################################
 
